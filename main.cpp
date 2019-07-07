@@ -9,6 +9,8 @@ using std::cout;
 using std::endl;
 using std::string;
 
+string& xml();
+
 int main()
 {
     using namespace boost::property_tree;
@@ -17,14 +19,6 @@ int main()
 
     ptree pt;
     read_xml(dicpath, pt);
-
-    //for(const auto& child : pt.get_child("ArrayOfSerial")) {
-    //    std::cout << child.second.get_child("Serial").data() << std::endl;
-    //    //const auto key = child.second.data();
-    //    //std::cout << key << std::endl;        
-    //    //const std::string value = child.second.data();
-    //    //std::cout << value << std::endl;
-    //}
 
     std::unordered_map<int, string> dic_en;
     std::unordered_map<string, int> dic_de;
