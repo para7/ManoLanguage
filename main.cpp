@@ -32,6 +32,7 @@ public: //alias
 
     using Encoder = std::unordered_map<wchar_t, ManoTranslator::string>;
     using Decoder = std::unordered_map<ManoTranslator::string, wchar_t>;
+    //„‚É‚ÍŠÔ‚ª‚È‚¢‚ñ‚Å‚·B¡‚ÍƒƒCƒh•¶š‚Å‚à‹–‚µ‚Ä‚­‚¾‚³‚¢
 
 private: //variables
 
