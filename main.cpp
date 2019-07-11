@@ -3,9 +3,26 @@
 #include <unordered_map>
 #include <locale>
 #include <clocale>
+#include <algorithm>
+#include <climits>
+#include <iomanip>
 
 using std::cout;
 using std::endl;
+
+//https://gist.github.com/calbonaler/1231f78c63fb0b78d26d368a025b1cce
+std::string toChars(int ch) {
+    std::string chars;
+    unsigned int chu = static_cast<unsigned int>(ch);
+    for (size_t i = 0; i < sizeof(chu); ++i)
+    {
+        char ch = static_cast<char>((chu >> (i * CHAR_BIT)) & ((1u << CHAR_BIT) - 1u));
+        if (!ch) break;
+        chars.push_back(ch);
+    }
+    std::reverse(chars.begin(), chars.end());
+    return chars;
+}
 
 class ManoTranslator
 {
@@ -57,20 +74,9 @@ public: //static funcs
 
 int main()
 {
-    std::locale::global(std::locale(""));
-
-    std::wstring manoed = L"‚Þ‚ñ‚Á‚Þ‚ñ‚Á‚Ù‚í‚Á‚Þ‚ñ‚Á‚Ù‚í‚Á‚Þ‚ñ‚Á‚Þ‚ñ‚Á‚Ù‚í‚Á‚Ù‚í‚Á‚Þ‚ñ‚Á‚Ù‚í‚Á‚Þ‚ñ‚Á‚Ù‚í‚Á‚Ù‚í‚Á‚Þ‚ñ‚Á‚Þ‚ñ‚Á‚Þ‚ñ‚Á‚Ù‚í‚Á‚Ù‚í‚Á‚Ù‚í‚Á‚Þ‚ñ‚Á‚Ù‚í‚Á‚Þ‚ñ‚Á‚Ù‚í‚Á‚Ù‚í‚Á‚Ù‚í‚Á‚Ù‚í‚Á‚Þ‚ñ‚Á‚Þ‚ñ‚Á‚Þ‚ñ‚Á‚Ù‚í‚Á‚Þ‚ñ‚Á‚Ù‚í‚Á‚Þ‚ñ‚Á‚Þ‚ñ‚Á‚Ù‚í‚Á‚Ù‚í‚Á‚Þ‚ñ‚Á‚Ù‚í‚Á‚Þ‚ñ‚Á‚Þ‚ñ‚Á‚Þ‚ñ‚Á‚Ù‚í‚Á‚Þ‚ñ‚Á‚Þ‚ñ‚Á‚Þ‚ñ‚Á";
-    const ManoTranslator::string str = L"‚Ü‚Ì‚¿‚á‚ñ‚©‚í‚¢‚¢";
-    
     ManoTranslator mano;
 
-    std::wcout << mano.Encode(str) << '\n';
-    std::wcout << mano.Encode(str).length() << '\n';
 
-    //for (auto x : manoed)
-    //{
-    //    cout << dec[x];
-    //}
 
     return 0;
 }
