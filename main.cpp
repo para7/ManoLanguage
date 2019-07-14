@@ -27,91 +27,13 @@ std::string toChars(int ch) {
     return chars;
 }
 
+
+
 int main()
 {
-    ManoTranslator mano;
+    Mano::ManoTranslator mano;
 
 
 
     return 0;
-}
-
-ManoTranslator::ManoTranslator()
-{
-    EncoderMaker(m_encoder);
-    DecoderMaker(m_decoder);
-}
-
-ManoTranslator::string ManoTranslator::Encode(const ManoTranslator::string& str) const
-{
-    ManoTranslator::string result;
-
-    for (auto w : str)
-    {
-        if (m_encoder.count(w) == 0)
-        {
-            result += w;
-            continue;
-        }
-        result += m_encoder.at(w);
-    }
-
-    return result;
-}
-
-ManoTranslator::string ManoTranslator::Decode(const ManoTranslator::string& str) const
-{
-    ManoTranslator::string ret = L"";
-
-    const ManoTranslator::string howa = L"‚Ù‚í‚Á";
-    const ManoTranslator::string mun = L"‚Þ‚ñ‚Á";
-   
-    int seek = 0;
-
-    ManoTranslator::string match = L"";
-
-    while (seek < str.length())
-    {
-        auto c = str[seek];
-
-        if (c != howa.front() && c != mun.front())
-        {
-            ret += match;
-            ret += c;
-            seek++;
-            match = L"";
-            continue;
-        }
-
-        //I—¹ˆ—
-        if (str.length() - seek < 3)
-        {
-            ret += str.substr(seek);
-            break;
-        }
-
-        auto s = str.substr(seek, 3);
-
-        if (s != howa && s != mun)
-        {
-            ret += match;
-            ret += c;
-            seek++;
-            match = L"";
-            continue;
-        }
-
-        match += s;
-        seek += 3;
-
-        if (m_decoder.count(match) != 0)
-        {
-            ret += m_decoder.at(match);
-            match.clear();
-            continue;
-        }
-    }
-    ret += match;
-
-    return ret;
 }
